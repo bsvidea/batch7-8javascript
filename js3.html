@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button,span{
+            font-size:2em;
+        }
+    </style>
+    <script>
+        var quantity=0;
+        function increment()
+        {
+            quantity++;
+            document.getElementById("qty").innerText=quantity;
+        }
+        function decrement()
+        {
+            if(quantity>0)
+                quantity--;
+            document.getElementById("qty").innerText=quantity;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="increment()">+</button>
+    <span id="qty">0</span>
+    <button onclick="decrement()">-</button>
+</body>
+</html>
