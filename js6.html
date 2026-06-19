@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{
+            width: 3vw;
+        }
+    </style>
+    <script>
+        function add(num)
+        {
+            var x=document.getElementById("qty");
+            x.value=parseInt(x.value)+num;
+        }
+    </script>
+</head>
+<body>
+    <button onclick="add(-1)">-</button>
+    <span>
+        <input type="text" id="qty">
+    </span>
+    <button onclick="add(1)">+</button>
+</body>
+</html>
