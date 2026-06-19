@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box
+        {
+            width: 4vw;
+            height: 4vw;
+            background-color: darkgoldenrod;
+            margin: .1vw;
+            border-radius: 2vw;
+            text-align: center;
+            color:white;
+            font-size: 3em;
+            display: inline-block;
+        }
+    </style>
+    <script>
+        var num=1;
+        function dup()
+        {
+            var obj=document.createElement('div');
+            obj.className='box';
+            obj.innerText=num;
+            num++;
+            var x=document.getElementById("boxes");
+            x.appendChild(obj);
+        }
+    </script>
+</head>
+<body>
+    <button onclick=dup()>Add</button>
+    <div id="boxes"></div>
+</body>
+</html>
