@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        #gamebox
+        {
+            width: 40vw;
+            margin: auto;
+            background-color: aquamarine;
+        }
+        .box
+        {
+            width: 10vw;
+            height: 10vw;
+            background-color: lemonchiffon;
+            margin: .5vw;
+            font-size: 5em;
+            text-align: center;
+        }
+        .rowbox
+        {
+            display: flex;
+            margin: auto;
+            width: 33vw;
+        }
+    </style>
+    <script>
+        var turn='X';
+        function mark()
+        {
+            //console.warn(event.target.id);
+            var currentobj=event.target;
+            currentobj.innerText=turn;
+            if(turn=='X')
+                turn='O';
+            else
+                turn='X';
+
+        }
+        function setupgame()
+        {
+            for(i=0;i<3;i++)
+            {
+                var rowobj=document.createElement('div');
+                rowobj.className='rowbox';
+                for(j=0;j<3;j++)
+                {
+                    var obj=document.createElement('div') ;
+                    obj.className='box';
+                    obj.id='box_'+i+'_'+j;
+                    obj.addEventListener('click',mark);
+                    rowobj.appendChild(obj);
+                }
+                document.getElementById("gamebox").appendChild(rowobj);
+            }
+        }
+    </script>    
+</head>
+<body onload="setupgame()">
+    <h1>Tic Tac Toe</h1>
+    <div id="gamebox">
+    </div>
+</body>
+</html>
