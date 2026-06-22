@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #todobox
+        {
+            width: 40vw;
+            height: 30vw;
+            background-color: darkkhaki;
+            margin: auto;
+        }
+        .inputbox
+        {
+            width: 30vw;
+            display: block;
+            padding:2vw;
+            margin: auto;
+        }
+        input{
+            width: 20vw;
+            font-size: 1.2em;
+        }
+        .task
+        {
+            width: 36vw;
+            background-color: black;
+            margin: auto;
+            color:white;
+            display: flex;
+            justify-content: space-around;
+            height: 2.5vw;
+            margin-bottom: 1vw;
+            border-radius: 1vw;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function addtask()
+        {
+            var x=document.createElement('div');
+            x.className='task';
+            var p1=document.createElement('p');
+            var p2=document.createElement('span');
+
+            p1.innerText=document.getElementById('taskname').value;
+            p2.innerHTML="<i class='fa fa-trash-o'></i>";
+            x.appendChild(p1);
+            x.appendChild(p2);
+
+            
+            var obj=document.getElementById("tasklist");
+            obj.appendChild(x);
+
+            document.getElementById("taskname").value="";
+            document.getElementById("taskname").focus();
+        }
+    </script>
+</head>
+<body>
+    <div id="todobox">
+        <div class="inputbox">
+            <input type="text" id="taskname">
+            <button onclick="addtask()">Add Task</button>
+        </div>
+        <div id="tasklist">
+
+        </div>
+    </div>
+    
+</body>
+</html>
