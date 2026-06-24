@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rowobject
+        {
+            width: 50vw;
+            height: 4vw;
+            margin: .1vw;
+            display: flex;
+        }
+        .boxes
+        {
+            width: 4vw;
+            height: 4vw;
+            background-color: brown;
+            margin: .1vw;
+            color:white;
+            text-align: center;
+            font-size: 1.6em;
+            line-height: 4vw;
+        }
+    </style>
+    <script>
+        var total=0;
+        function setupgame()
+        {
+            var num=100;
+            for(i=0;i<10;i++)
+            {
+                var rowdiv=document.createElement('div');
+                rowdiv.className="rowobject";
+                for(j=0;j<10;j++)
+                {
+                    var box=document.createElement('div');
+                    box.className="boxes";
+                    box.innerText=num;
+                    box.id="box"+num;
+                    if(i%2==0)
+                        num--;
+                    else    
+                        num++;
+                    rowdiv.appendChild(box);
+                }
+                if(i%2==0)
+                    num-=9;
+                else    
+                    num-=11;
+                document.getElementById("gamearea").appendChild(rowdiv);
+            }
+        }
+        function roll()
+        {
+            var rn=Math.random();
+            //(upperlimit-lowerlimit+1)*random number +lowerlimit
+            var rno= parseInt((6-1+1)*rn+1);
+
+            document.getElementById("rollednum").innerText=rno;
+            if(total+rno>100)
+            {
+                return;   
+            }
+            if(total>0)
+            {
+                document.getElementById("box"+total).style.backgroundColor="brown";    
+            }
+            total+=rno;
+            document.getElementById("box"+total).style.backgroundColor="gold";
+            
+        }
+        function restart()
+        {
+            document.getElementById("box"+total).style.backgroundColor="brown";    
+            total=0;
+            document.getElementById("rollednum").innerText="";
+        }
+    </script>
+</head>
+<body onload="setupgame()">
+    <div style="display:flex;">
+        <div id="gamearea">
+        </div>
+        <div>
+            <button onclick="roll()">Roll Out</button>
+            <p id="rollednum"></p>
+            <div>
+                <button onclick="restart()">Restart Game</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
