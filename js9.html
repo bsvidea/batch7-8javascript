@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .myimage
+        {
+            width: 20vw;
+            height: 20vw;
+            overflow: hidden;
+            transition: margin-top  .5s ease-in-out;
+        }
+        img
+        {
+            display: block;
+            width: 100%;
+            
+        }
+        .myimage:hover{
+            margin-top: -1vw;
+            filter: grayscale();
+        }
+    </style>
+</head>
+<body>
+    <div>JAVASCIRPT</div>
+    <div class="myimage">
+        <img src="butterfly.jpg">
+    </div>
+    
+</body>
+</html>
