@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main
+        {
+            display: flex;
+            justify-content: space-around;
+        }
+        #left
+        {
+            width: 70vw;
+            height: 40vw;
+            background-color: bisque;
+        }
+        #right
+        {
+            width: 25vw;
+            height: 40vw;
+            background-color: aliceblue;
+        }
+        h1
+        {
+            text-align: center;
+        }
+        .options
+        {
+            width: 50vw;
+            height: 3vw;
+            padding: 1vw;
+            margin: .5vw;
+            background-color: darkgrey;
+            margin-left: 9vw;
+            font-size: 1.2em;
+        
+        }
+        .options:hover
+        {
+            background-color: black;
+            color:white;
+        }
+        #qbox
+        {
+            width: 60vw;
+            height: 10vw;
+        }
+        button{
+            padding:.5vw;
+        }
+        #qbox
+        {
+            font-size: 1.4em;
+            padding: 1vw;
+            font-weight: bold;
+        }
+        #numberbox
+        {
+            background-color: cornflowerblue;
+        }
+        .qnumber
+        {
+            width: 3vw;
+            height: 3vw;
+            background-color: white;
+            color: black;
+            display: inline-block;
+            margin: .2vw;
+            border-radius: .75vw;
+            text-align: center;
+            line-height: 3vw;
+            cursor: pointer;
+        }
+        .qnumber:hover{
+            background-color: darkmagenta;
+        }
+        .selectedbox
+        {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script src="quiz.js"></script>
+</head>
+<body onload="setup()">
+    <h1>Mock Test </h1>
+    <div id="main">
+        <div id="left">
+            <div id="qbox"></div>
+            <div>
+                <div class="options" id="opt1" onclick="makeselect(1)"></div>
+                <div class="options" id="opt2" onclick="makeselect(2)"></div>
+                <div class="options" id="opt3" onclick="makeselect(3)"></div>
+                <div class="options" id="opt4" onclick="makeselect(4)"></div>
+            </div>
+            <div style="width: 30vw;margin: auto;text-align: center;">
+                <button onclick="showprev()">Previous</button>
+                <button onclick="shownext()">Next</button>
+            </div>
+
+        </div>
+        <div id="right">
+            <div id="numberbox"></div>
+        </div>
+    </div>
+</body>
+</html>
