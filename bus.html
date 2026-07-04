@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p{
+            font-size: 2em;
+            height: 2vw;
+            line-height: 2vw;
+            margin-top: .25vw;
+        }
+        body
+        {
+            background-color: antiquewhite;
+        }
+        .boardingbox
+        {
+             display: flex;
+             width:35vw;
+             height: 4vw;
+             background-color: white;
+             padding: 1vw;
+             border-radius: 1vw;
+        }
+        input
+        {
+            font-size: 1.3em;
+        }
+        #boardingboxclose
+        {
+            font-size: 2em;
+            text-align: center;
+            color:red;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            width: 4vw;
+            cursor: pointer;
+        }
+        #boardingpopup
+        {
+            width: 25vw;
+            height: 30vw;
+            background-color: darksalmon;
+            margin-left: 5vw;
+            overflow: scroll;
+            display: none;
+        }
+        .popitem
+        {
+            padding: .5vw;
+            margin: .5vw;
+            height: 2vw;
+            background-color: azure;
+            text-align: left;
+            font-size: 1em;
+            border-radius: .5vw;
+            cursor: pointer;;
+        }
+        .popitem:hover{
+            background-color: blue;
+            color:white;
+        }
+    </style>
+    <script>
+        const busLocations = [
+  { id: 1, boarding: "Chennai", destination: "Trichy" },
+  { id: 2, boarding: "Trichy", destination: "Madurai" },
+  { id: 3, boarding: "Madurai", destination: "Coimbatore" },
+  { id: 4, boarding: "Coimbatore", destination: "Bangalore" },
+  { id: 5, boarding: "Bangalore", destination: "Chennai" },
+  { id: 6, boarding: "Hyderabad", destination: "Vijayawada" },
+  { id: 7, boarding: "Mumbai", destination: "Pune" },
+  { id: 8, boarding: "Pune", destination: "Goa" },
+  { id: 9, boarding: "Delhi", destination: "Agra" },
+  { id: 10, boarding: "Kochi", destination: "Trivandrum" },
+  { id: 11, boarding: "Chennai", destination: "Madurai" },
+  { id: 12, boarding: "Chennai", destination: "Bangalore" },
+  { id: 13, boarding: "Trichy", destination: "Chennai" },
+  { id: 14, boarding: "Trichy", destination: "Salem" },
+  { id: 15, boarding: "Madurai", destination: "Chennai" },
+  { id: 16, boarding: "Coimbatore", destination: "Chennai" },
+  { id: 17, boarding: "Bangalore", destination: "Mysore" },
+  { id: 18, boarding: "Bangalore", destination: "Hyderabad" },
+  { id: 19, boarding: "Hyderabad", destination: "Bangalore" },
+  { id: 20, boarding: "Mumbai", destination: "Ahmedabad" },
+  { id: 21, boarding: "Pune", destination: "Mumbai" },
+  { id: 22, boarding: "Delhi", destination: "Jaipur" },
+  { id: 23, boarding: "Delhi", destination: "Chandigarh" },
+  { id: 24, boarding: "Kochi", destination: "Calicut" },
+  { id: 25, boarding: "Salem", destination: "Chennai" },
+  { id: 26, boarding: "Salem", destination: "Coimbatore" },
+  { id: 27, boarding: "Vellore", destination: "Chennai" },
+  { id: 28, boarding: "Vellore", destination: "Bangalore" },
+  { id: 29, boarding: "Vijayawada", destination: "Hyderabad" },
+  { id: 30, boarding: "Trivandrum", destination: "Kochi" }
+];
+
+        function cleartext()
+        {
+            document.getElementById("boarding").value="";
+            document.getElementById("boarding").focus();
+        }
+        function showbpoints()
+        {
+            var obj=document.getElementById("boarding");
+            var txt=obj.value;
+            var buses=[];
+            document.getElementById("boardingpopup").innerHTML="";
+            for(var i=0;i<busLocations.length;i++)
+            {
+                var bus=busLocations[i];
+                var boardtxt=bus['boarding'].toLowerCase().substr(0,txt.length);
+                if(boardtxt==txt.toLowerCase())
+                {
+                    var x=bus['boarding'];
+                    if(buses.indexOf(x)==-1)
+                        buses.push(bus['boarding']);
+                }
+            }
+            buses.forEach(element => {
+                var x1=document.createElement('p');
+                x1.innerText=element;
+                x1.className="popitem";
+                x1.addEventListener('click',assignboardingpoint);
+                document.getElementById("boardingpopup").appendChild(x1);
+            });
+            document.getElementById("boardingpopup").style.display="block";
+        }
+        function assignboardingpoint()
+        {
+            var txt=event.target.innerText;
+            document.getElementById("boarding").value=txt;  
+            document.getElementById("boardingpopup").style.display='none';
+        }
+    </script>
+</head>
+<body>
+    <div class="boardingbox">
+        <div>
+            <p>🚌</p>
+        </div>
+        <div>
+            <label>From</label>
+            <div>
+                <input type="text" id="boarding" onkeyup="showbpoints()">
+            </div>
+        </div>
+        <div id="boardingboxclose" onclick="cleartext()">
+            X
+        </div>
+    </div>
+
+    <div id="boardingpopup">
+
+    </div>
+</body>
+</html>
