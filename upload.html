@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .remarksuccess
+        {
+            color:green;
+        }
+        .remarkerror
+        {
+            color:red;
+        }
+        .showimg
+        {
+            width: 10vw;
+            height: 10vw;
+        }
+        .showimg img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+    </style>
+    <script>
+        function previewfile()
+        {
+            
+            var x=event.target.files[0];
+            console.warn(x);
+            var myimg=document.getElementById("imgpreview");
+            var rm=document.getElementById("remark");
+            var ftype=x['type'].split('/')[0];
+            if(ftype=='image')
+            {
+                document.getElementById("dummy").innerText=x['type'];
+                var imgsize=x['size'];
+                if(imgsize>2*1024*1024)
+                {
+                    rm.className="remarkerror";
+                    rm.innerText="image size should be <2MB";
+                    myimg.style.display='none';
+                }
+                else
+                {
+                    rm.innerText="";
+                    rm.className="remarksuccess";
+                    rm.innerText='Accepted';
+                    
+                    myimg.src=URL.createObjectURL(x);
+                    myimg.style.display='block';
+                }
+                
+            }
+            else    
+            {
+                rm.className="remarkerror";
+                rm.innerText="only images are accepted";
+                document.getElementById("selectedfile").value=""
+                document.getElementById("dummy").innerText="";
+                document.getElementById("imgpreview").src="";
+                myimg.style.display='none';
+            }
+                
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <label>Select File to Upload</label>
+        <input type="file" accept="image/*" id="selectedfile"  onchange="previewfile()">
+    </div>
+    <div id="dummy"></div>
+    <div id="remark"></div>
+    <div class="showimg">
+        <img id="imgpreview" src="">            
+    </div>
+
+</body>
+</html>
