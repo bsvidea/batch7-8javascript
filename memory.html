@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box
+        {
+            width: 12vw;
+            height: 12vw;
+            background-color: aqua;
+            margin:.5vw;
+            display: inline-block;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script>
+        var imageindex=[];
+        function setupgame()
+        {
+            var count=0;
+            while(count<12)
+            {
+                var rnd=parseInt(Math.random()*6);
+                var cnt=0;
+                for(var i=0;i<imageindex.length;i++)
+                {
+                    if(rnd==imageindex[i])   
+                        cnt++;
+                }
+                if(cnt<2)
+                {
+                    imageindex.push(rnd);
+                    count++;
+                }
+            }
+            console.log(imageindex);
+            var x=0;
+            for(var r=0;r<3;r++)
+            {
+                var rowobj=document.createElement('div');
+
+                for(var c=0;c<4;c++)    
+                {
+                    var colobj=document.createElement('div');
+                    colobj.classList="box";
+                    var txt="<img id=box"+ x + " src='images/a"+ (imageindex[x]+1) + ".jpg'>";
+                    colobj.innerHTML=txt;
+                    rowobj.appendChild(colobj);
+                    x++;
+                }
+                document.getElementById("gamearea").appendChild(rowobj);
+            }
+            setTimeout(resetimage,2000);
+        }
+        function resetimage()
+        {
+            for(var i=0;i<12;i++)
+            {
+                document.getElementById("box"+i).parentElement.innerHTML="";    
+            }
+        }
+
+
+    </script>
+</head>
+<body onload="setupgame()">
+    <div id="gamearea">
+
+    </div>
+    
+</body>
+</html>
