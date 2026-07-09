@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div
+        {
+            width:15vw;
+            height:4vw;
+            padding:1vw;
+            background-color: antiquewhite;
+            text-align: center;
+        }
+        table
+        {
+            width:60vw;
+        }
+    </style>
+    <script>
+        var current,droppedobject;
+        var colors={
+            "fruit":"orange",
+            "vegetable":"green",
+            "protein":"blue",
+            "snack":"yellow"
+        }
+        function allowDrop(event)
+        {
+            event.preventDefault();
+        }
+        function drag(event)
+        {
+            current = event.target;
+            event.dataTransfer.setData("text", event.target.getAttribute("data-type"));
+        }
+        function check(event)
+        {
+            event.preventDefault(); 
+            console.log("check");
+            var dragged = event.dataTransfer.getData("text");
+            var dropped = event.target.getAttribute("data-type");
+            if(dragged == dropped)
+            {
+                event.target.style.backgroundColor = colors[dragged];
+                current.style.backgroundColor = colors[dragged];
+                current.setAttribute("draggable", "false");
+            }
+            else
+            {
+                event.target.style.backgroundColor = "red";
+                current.style.backgroundColor = "red";
+                droppedobject=event.target;
+                setTimeout(clearerror, 1000);
+            }
+        }
+        function clearerror()
+        {
+            current.style.backgroundColor = "antiquewhite";
+            droppedobject.style.backgroundColor = "antiquewhite";
+        }
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><div draggable="true" data-type="fruit" ondragstart="drag(event)">Apple</div></td>
+            <td><div  data-type="snack" ondrop="check(event)" ondragover="allowDrop(event)">Kurkure</div></td>
+        </tr>
+        <tr>
+            <td><div draggable="true" data-type="vegetable" ondragstart="drag(event)">Beetroot</div></td>
+            <td><div data-type="fruit"  ondrop="check(event)" ondragover="allowDrop(event)" >Orange</div></td>
+        </tr>
+        <tr>
+            <td><div draggable="true" data-type="protein" ondragstart="drag(event)">Fish</div></td>
+            <td><div data-type="vegetable"  ondrop="check(event)" ondragover="allowDrop(event)">Potato</div></td>
+        </tr>
+        <tr>
+            <td><div draggable="true" data-type="snack" ondragstart="drag(event)">Lays</div></td>
+            <td><div data-type="protein"  ondrop="check(event)" ondragover="allowDrop(event)">Chicken</div></td>
+        </tr>
+    </table>
+    
+    
+    
+</body>
+</html>
