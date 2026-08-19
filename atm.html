@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error
+        {
+            color:red;
+        
+        }
+        #msg
+        {
+            display: none;
+        }
+        .success
+        {
+            color: green;
+            font-weight: bold;
+        }
+        .loadmoney
+        {
+            width: 15vw;
+            height: 4vw;
+            background-color: green;
+            text-align: center;
+            line-height: 4vw;
+            cursor: pointer;
+        }
+        .withdraw
+        {
+            width: 15vw;
+            height: 4vw;
+            background-color: blue;
+            text-align: center;
+            line-height: 4vw;
+            cursor: pointer;
+        }
+        #moneybox
+        {
+            display: none;
+
+        }
+
+    </style>
+    <script>
+        
+        var cash={500:0,200:0,100:0};
+        var atmamount=(500*cash[500]+ 200*cash[200]+ 100*cash[100]);
+        function check()
+        {
+            var amt=document.getElementById("amount");
+            var err=document.getElementById("msg");
+            err.classList.remove('success');
+            err.classList.remove('error');
+            err.style.display="block";
+            if(amt.value>50000)
+            {
+                err.innerText="value should be <50000";  
+                err.classList.add('error');
+            }
+            // else if(amt.value%500>0)
+            // {
+            //     err.innerText="value should be in 500's";
+            //     err.classList.add('error');
+            // }
+            else if(amt.value<=atmamount)
+            {
+                var f1=parseInt(amt.value/500);
+                var r=amt.value%500;
+
+                if(f1>cash[500])
+                {
+                    var x1=( f1-cash[500])*500;
+                    var f2=parseInt(x1/200);
+                    var f3=x1%200;
+                    cash[500]=0;
+                    cash[200]-=f2;
+                    cash[100]-=f3;
+
+                }
+                else
+                {
+                    cash[500]-=f1;
+                    if(r>0)
+                    {
+                        f2=parseInt(r/200);
+                        f3=r%200;
+                        cash[500]=0;
+                        cash[200]-=f2;
+                        cash[100]-=f3;
+                    }
+                }
+                atmamount=(500*cash[500]+ 200*cash[200]+ 100*cash[100]);
+                err.innerText="Amount Debited";
+                err.classList.add('success');
+            }
+            
+            amt.value="";
+            amt.focus();
+            setTimeout(clearmsg,5000);
+        }
+        function clearmsg()
+        {
+            document.getElementById("msg").style.display='none';
+        }
+        function showload()
+        {
+            document.getElementById("atmbox").style.display='none';
+            document.getElementById("moneybox").style.display='block';
+            document.getElementById("balance").innerText=atmamount;
+            
+            document.getElementById("m1").value=cash[500];
+            document.getElementById("m2").value=cash[200];
+            document.getElementById("m3").value=cash[100];
+        }
+        function showatm()
+        {
+            document.getElementById("atmbox").style.display='block';
+            document.getElementById("moneybox").style.display='none';
+        }
+        function updatecash()
+        {
+            cash[500]+=parseInt(document.getElementById("m1").value);
+            cash[200]+=parseInt(document.getElementById("m2").value);
+            cash[100]+=parseInt(document.getElementById("m3").value);
+            atmamount+=(500*cash[500]+ 200*cash[200]+ 100*cash[100]);
+            document.getElementById("balance").innerText=atmamount;
+            document.getElementById("m1").value="";
+            document.getElementById("m2").value="";
+            document.getElementById("m3").value="";
+        }
+    </script>
+</head>
+<body>
+    <div style="display: flex;">
+        <div onclick="showload()" class="loadmoney">Load Money</div>
+        <div class="withdraw" onclick="showatm()">Withdraw</div>
+    </div>
+    <div id="moneybox">
+        <div>
+            <label>Cash Available</label>
+            <label id="balance"></label>
+        </div>
+        <div>
+            <label>500's</label>
+            <input type="text" id="m1">
+        </div>
+        <div>
+            <label>200's</label>
+            <input type="text" id="m2">
+        </div>
+        <div>
+            <label>100's</label>
+            <input type="text" id="m3">
+        </div>
+        <div>
+            <button onclick="updatecash()">Update Cash</button>
+        </div>
+    </div>
+    <div id="atmbox">
+        <div>
+            <label>Amount</label>
+            <input type="text" id="amount">
+            <p id="msg"></p>
+        </div>
+        <div>
+            <button onclick="check()">Enter</button>
+        </div>
+    </div>
+</body>
+</html>
