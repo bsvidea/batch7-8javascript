@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function guess()
+        {
+            //(upper limit-lower limit+1)* Random number + lower limit
+            var r=parseInt((10-1+1)*Math.random()+1);
+            var x=document.getElementById("numberInput").value;
+            if(r==x)
+            {
+                alert("Win");
+            }
+            else
+            {
+                alert('Try AGain');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <h1>Guess a Number</h1>
+    </div>
+    <div>
+        <label>Number</label>
+        <input type="number" id="numberInput">
+    </div>
+    <div>
+        <button onclick="guess()">Guess</button>
+    </div>
+</body>
+</html>
